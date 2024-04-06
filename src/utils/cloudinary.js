@@ -1,6 +1,7 @@
 import { v2 as cloudinary} from "cloudinary";
 // fs = filesystem it is present in node to read write file
 import fs from "fs"
+import { ApiError } from "./ApiError";
 
 cloudinary.config({ 
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME, 
@@ -26,4 +27,14 @@ const uploadOnCloudinary = async (localFilePath)=>{
     }
 }
 
-export {uploadOnCloudinary}
+const deleteFromCloudinary = async(imgUrl)=>{
+    try {
+        cloudinary.uploader.destroy(imgUrl,{resource_type:"auto"})
+        console.log("file deleted successfully")
+        
+    } catch (error) {
+        throw new ApiError(400,"Error while deleting image from cloudinary")
+    }
+}
+
+export {uploadOnCloudinary,deleteFromCloudinary}
