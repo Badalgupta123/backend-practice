@@ -1,7 +1,7 @@
 import { v2 as cloudinary} from "cloudinary";
 // fs = filesystem it is present in node to read write file
 import fs from "fs"
-import { ApiError } from "./ApiError";
+import { ApiError } from "./ApiError.js";
 
 cloudinary.config({ 
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME, 
