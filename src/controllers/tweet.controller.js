@@ -58,6 +58,9 @@ const updateTweet = asyncHandler(async (req, res) => {
     if(!tweetId ){
         throw new ApiError(400,"TweetId not found")
     }
+    if(!mongoose.isValidObjectId(tweetId)){
+        throw new ApiError(400,"Please enter valid videoId")
+    }
     if(!content ){
         throw new ApiError(400,"please provide the updated content")
     }
@@ -83,6 +86,9 @@ const deleteTweet = asyncHandler(async (req, res) => {
 
     if(!tweetId){
         throw new ApiError(400,"TweetId not found")
+    }
+    if(!mongoose.isValidObjectId(tweetId)){
+        throw new ApiError(400,"Please enter valid videoId")
     }
 
     const result= await Tweet.findByIdAndDelete(tweetId )
